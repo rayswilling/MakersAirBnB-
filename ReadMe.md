@@ -2,4 +2,4 @@
 
 ## MAPPING 
 
-![amazingspecnesting](./images/specshot.png)
+![amazingspecnesting](./image.png)
