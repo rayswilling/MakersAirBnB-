@@ -31,7 +31,7 @@ class Dreambnb < Sinatra::Base
 
   post '/sessions' do
     user = User.authenticate(email: params[:email], password: params[:password])
-    if user
+    if !user.nil?
       redirect '/spaces'
     else
       flash[:notice] = 'Email or password is incorrect'
