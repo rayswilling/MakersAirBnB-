@@ -1,7 +1,6 @@
 require 'web_helpers'
 
 feature "User Signup" do
-
   scenario 'user can signup' do
     signup_user
 
@@ -29,5 +28,4 @@ feature "User Signup" do
     expect(current_path).to eq('/')
     expect(current_path).not_to eq('/spaces')
   end
-
 end

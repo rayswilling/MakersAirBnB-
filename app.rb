@@ -9,16 +9,33 @@ class Dreambnb < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    erb(:signup)
+    erb(:index)
   end
 
   post '/users' do
-    if (User.first(email: params[:email]) == nil) && (params[:password] == params[:password_confirmation])
-      User.create(:email => params[:email], :password => params[:password])
-      redirect '/spaces'
-    else
+    if !User.first(email: params[:email]).nil?
       flash[:notice] = 'Email in use'
       redirect '/'
+    elsif params[:password] != params[:password_confirmation]
+      flash[:notice] = "Passwords don't match"
+      redirect '/'
+    else
+      User.create(:email => params[:email], :password => params[:password])
+      redirect '/spaces'
+    end
+  end
+
+  get '/sessions/new' do
+    erb(:login)
+  end
+
+  post '/sessions' do
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      redirect '/spaces'
+    else
+      flash[:notice] = 'Email or password is incorrect'
+      redirect '/sessions/new'
     end
   end
 end
