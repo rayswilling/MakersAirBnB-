@@ -1,5 +1,5 @@
-ENV['ENVIRONMENT'] = 'test'
-# ENV['RACK_ENV'] = 'test'
+# ENV['ENVIRONMENT'] = 'test'
+ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
@@ -51,6 +51,12 @@ RSpec.configure do |config|
     # a real object. This is generally recommended, and will default to
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
+  end
+
+  RSpec.configure do |config|
+    config.before(:each) do
+      DataMapper.auto_migrate!
+    end
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
