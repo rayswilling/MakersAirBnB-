@@ -1,4 +1,5 @@
 require 'data_mapper'
+require './lib/user'
 
 if ENV['RACK_ENV'] == 'test'
   DataMapper.setup(

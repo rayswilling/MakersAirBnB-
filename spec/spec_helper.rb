@@ -1,5 +1,5 @@
 ENV['ENVIRONMENT'] = 'test'
-# ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
@@ -42,6 +42,10 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.before(:each) do
+    DataMapper.auto_migrate!
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
