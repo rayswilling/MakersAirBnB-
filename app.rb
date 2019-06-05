@@ -70,9 +70,13 @@ class Dreambnb < Sinatra::Base
     erb :new
   end
 
-  get '/spaces/:id' do 
+   get '/spaces/:id' do 
     @listing = Listing.get(params[:id])
     
     erb :space
   end
+
+  get '/requests' do 
+    erb :request
+  end 
 end
