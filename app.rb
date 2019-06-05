@@ -38,4 +38,25 @@ class Dreambnb < Sinatra::Base
       redirect '/sessions/new'
     end
   end
+
+    # post '/spaces' do
+  #   # User.create(email: "Francesca@gmail.com", password: "secretinit"
+  #   Listing.create(name: "Ecological Artistic Retreat", description: "For a lovely getaway",
+  #   price: "£23")
+  #   erb :spaces
+  # end
+
+  get '/spaces' do
+    @listings = Listing.all
+    erb :spaces
+  end
+
+  post '/spaces' do
+    @listings = Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until])
+    redirect '/spaces'
+  end
+
+  get '/spaces/new' do
+    erb :new
+  end
 end
