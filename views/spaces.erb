@@ -12,6 +12,9 @@
 
 
 <% @listings.each do |listing| %>
+<a href="/spaces/<%= listing.prop_id %>" >
+<%= listing.name %> </a>
+=======
 
 <ul>
 <li><%= listing.name %></li>
