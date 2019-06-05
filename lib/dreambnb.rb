@@ -6,7 +6,7 @@ class Listing
   include DataMapper::Resource
 
   property :prop_id,             Serial
-  # property :user_id,             Serial, :required => false  # once we merge we will make this true
+  property :user_id,             String, :required => false  # once we merge we will make this true
   property :name,                String, :required => true
   property :description,         String, :required => true
   property :price,               String, :required => true
