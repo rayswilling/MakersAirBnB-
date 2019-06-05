@@ -1,5 +1,6 @@
 require 'data_mapper'
 require './lib/user'
+require './lib/dreambnb.rb'
 
 if ENV['RACK_ENV'] == 'test'
   DataMapper.setup(
