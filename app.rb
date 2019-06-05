@@ -67,7 +67,8 @@ class Dreambnb < Sinatra::Base
   end
 
   post '/spaces' do
-    @listings = Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until])
+    user = User.get(session[:id])
+    @listings = Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
     
     redirect '/spaces'
   end
