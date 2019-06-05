@@ -76,4 +76,8 @@ class Dreambnb < Sinatra::Base
   get '/spaces/new' do
     erb :new
   end
+
+  get '/requests' do 
+    erb :request
+  end 
 end
