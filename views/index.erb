@@ -1,0 +1,22 @@
+<a href='/sessions/new'>Login</a>
+<center>
+  <h1>Feel at home, anywhere</h1>
+  <h3>Sign up to DreamBnB</h3>
+  <h3 style='color:red;'><%= flash[:notice] %></h3>
+  <form action='/users' method='post'>
+    Email:
+    <br>
+    <input type='text' name='email'/>
+    <br>
+    Password:
+    <br>
+    <input type='password' name='password'/>
+    <br>
+    Password confirmation:
+    <br>
+    <input type='password' name='password_confirmation'/>
+    <br>
+    <br>
+    <input type='submit' name='sign_up' value='Sign Up'/>
+  </form>
+</center>
