@@ -8,6 +8,8 @@
 
 
 <% @listings.each do |listing| %>
-    <a href="/spaces/<%= listing.prop_id %>" >
-<%= listing.name %> </a>
+    <ul>
+        <li><a href="/spaces/<%= listing.prop_id %>" >
+        <%= listing.name %> </a></li>
+    </ul>
 <% end %>

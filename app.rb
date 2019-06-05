@@ -54,13 +54,6 @@ class Dreambnb < Sinatra::Base
     redirect '/'
   end
 
-    # post '/spaces' do
-  #   # User.create(email: "Francesca@gmail.com", password: "secretinit"
-  #   Listing.create(name: "Ecological Artistic Retreat", description: "For a lovely getaway",
-  #   price: "£23")
-  #   erb :spaces
-  # end
-
   get '/spaces' do
     @listings = Listing.all
     erb :spaces
@@ -75,5 +68,11 @@ class Dreambnb < Sinatra::Base
 
   get '/spaces/new' do
     erb :new
+  end
+
+  get '/spaces/:id' do 
+    @listing = Listing.get(params[:id])
+    
+    erb :space
   end
 end
