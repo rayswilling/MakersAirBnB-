@@ -6,11 +6,11 @@ class Listing
   include DataMapper::Resource
 
   property :prop_id,             Serial
-  property :name,                String, :required => true
-  property :description,         String, :required => true
-  property :price,               String, :required => true
+  property :name,                String, required: true
+  property :description,         String, required: true
+  property :price,               String, required: true
   property :available_from,      DateTime
   property :available_to,        DateTime
 
-  belongs_to :user, :required => false
+  belongs_to :user, required: false
 end

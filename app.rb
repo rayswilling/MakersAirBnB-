@@ -20,7 +20,7 @@ class Dreambnb < Sinatra::Base
       flash[:notice] = "Passwords don't match"
       redirect '/'
     else
-      User.create(:email => params[:email], :password => params[:password])
+      User.create(email: params[:email], password: params[:password])
       redirect '/spaces'
     end
   end
