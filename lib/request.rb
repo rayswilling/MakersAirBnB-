@@ -7,7 +7,7 @@ class Request
     include DataMapper::Resource
 
     property :id,                   Serial
-    property :arrival_date,         DateTime
+    property :arrival_date,         Date
     # property :status,       String, default: 'Unconfirmed' # Required!
 
     belongs_to :user 

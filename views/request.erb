@@ -1,0 +1,39 @@
+<form action="/sessions/logout" method='post'>
+    <button>Log out</button>
+</form>
+
+<form action="/requests" method='get'>
+    <button>Requests</button>
+</form>
+<br>
+
+
+<h1>Request for '<%= @name %>'</h1>
+<br>
+
+<h2>From: <%= @email %></h2>
+<br>
+
+<h3>Date: <%= @date %> </h3> 
+
+<h2>Other Requests for this</h2>
+<br>
+<% @other_requests_for_space.each do |other_request| %>
+<ul>
+    <%= @name %> </a></li>
+    <li><%= other_request.arrival_date.strftime(fmt='%d/%m/%Y') %></li>
+</ul>
+<% end %>
+
+<form action="/requests" method='post'>
+    <button>Confirm Request from <%= @email %> </button>
+</form>
+<br>
+
+<form action="/requests" method='post'>
+    <button>Deny Request from <%= @email %> </button>
+</form>
+<br>
+
+
+
