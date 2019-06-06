@@ -7,40 +7,44 @@
             <table style="text-align: center; border: 2px solid black; width: 300px">
                 <tr>
                     <th>Requests I've Made</th>
-            
+
                 </tr>
+                <% @requests_made.each do |request| %>
                 <tr>
-                    <td>Request 1</td>
-              
+                    <td><%=Listing.get(request.listing_prop_id).name %> <br>
+                      <%=request.arrival_date.strftime("%d/%m/%Y") %> <br>
+                      <% if request.confirm.nil? %>
+                      <%= "Not confirmed" %>
+                      <% elsif request.confirm %>
+                      <%= "Confirmed" %>
+                      <% else %>
+                      <%= "Denied" %>
+                      <% end %>
+                    </td>
+
                 </tr>
-                <tr>
-                    <td>Request 2</td>
-                   
-                </tr>
-                    <tr>
-                    <td>Request 3</td>
-                
-                </tr>
+                <%end%>
+
             </table>
         </td>
-   
+
         <td>
             <table style="text-align: center; border: 2px solid black; width: 300px">
                 <tr>
                     <th>Requests I've Received</th>
-                   
+
                 </tr>
                 <tr>
                     <td>Request 1</td>
-                   
+
                 </tr>
                 <tr>
                     <td>Request 2</td>
-                  
+
                 </tr>
                     <tr>
                     <td>Request 3</td>
-                 
+
                 </tr>
             </table>
         </td>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'date'
@@ -37,7 +39,7 @@ class Dreambnb < Sinatra::Base
 
   post '/sessions' do
     user = User.authenticate(email: params[:email], password: params[:password])
-    
+
     if !user.nil?
       session[:id] = user.id
 
@@ -64,7 +66,7 @@ class Dreambnb < Sinatra::Base
   post '/spaces' do
     user = User.get(session[:id])
     Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
-    
+
     redirect '/spaces'
   end
 
@@ -72,26 +74,30 @@ class Dreambnb < Sinatra::Base
     erb :new
   end
 
-   get '/spaces/:id' do 
+  get '/spaces/:id' do
     @listing = Listing.get(params[:id])
 
     erb :space
   end
 
-   post '/requests' do
+  post '/requests' do
     user = User.get(session[:id])
     listing = Listing.get(params[:prop_id])
 
     Request.create(
-      arrival_date: params[:arrival_date], 
-      user: user, 
-      listing: listing)
+      arrival_date: params[:arrival_date],
+      user: user,
+      listing: listing
+    )
 
-      flash[:notice] = 'Thanks for your request. The owner has been notified.'
-      redirect '/requests'
+    flash[:notice] = 'Thanks for your request. The owner has been notified.'
+    redirect '/requests'
   end
 
-  get '/requests' do 
-    erb :requests
-  end 
+  get '/requests' do
+    @requests_made = Request.all(user_id: session[:id])
+    p session[:id]
+    p @requests_made
+      erb :requests
+  end
  end
