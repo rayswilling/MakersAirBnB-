@@ -72,13 +72,13 @@ class Dreambnb < Sinatra::Base
     erb :new
   end
 
-  get '/spaces/:id' do 
+   get '/spaces/:id' do 
     @listing = Listing.get(params[:id])
 
     erb :space
   end
 
-  post '/requests' do
+   post '/requests' do
     user = User.get(session[:id])
     listing = Listing.get(params[:prop_id])
 
@@ -89,4 +89,8 @@ class Dreambnb < Sinatra::Base
 
       flash[:notice] = 'Thanks for your request. The owner has been notified.'
   end
-end
+
+  get '/requests' do 
+    erb :request
+  end 
+ end
