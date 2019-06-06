@@ -1,3 +1,6 @@
+<form action="/sessions/logout" method='post'>
+    <button>Log out</button>
+</form>
 <center>
 <h1>Requests</h1>
 <%= flash[:notice]%>
@@ -32,20 +35,20 @@
             <table style="text-align: center; border: 2px solid black; width: 300px">
                 <tr>
                     <th>Requests I've Received</th>
-
                 </tr>
+
+                <% @user_spaces.each do |space| %>
                 <tr>
-                    <td>Request 1</td>
+                  <td>
+                    <%= space.name %> <br>
+                
 
-                </tr>
-                <tr>
-                    <td>Request 2</td>
 
-                </tr>
-                    <tr>
-                    <td>Request 3</td>
 
+                  </td>
                 </tr>
+                <% end %>
+
             </table>
         </td>
     </tr>
