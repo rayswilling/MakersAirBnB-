@@ -1,7 +1,9 @@
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'date'
 require_relative './lib/dreambnb'
 require_relative './lib/user'
+require_relative './lib/request'
 require_relative './lib/database_connection_setup'
 
 class Dreambnb < Sinatra::Base
@@ -61,7 +63,7 @@ class Dreambnb < Sinatra::Base
 
   post '/spaces' do
     user = User.get(session[:id])
-    @listings = Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
+    Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
     
     redirect '/spaces'
   end
@@ -72,7 +74,19 @@ class Dreambnb < Sinatra::Base
 
   get '/spaces/:id' do 
     @listing = Listing.get(params[:id])
-    
+
     erb :space
+  end
+
+  post '/requests' do
+    user = User.get(session[:id])
+    listing = Listing.get(params[:prop_id])
+
+    Request.create(
+      arrival_date: params[:arrival_date], 
+      user: user, 
+      listing: listing)
+
+      flash[:notice] = 'Thanks for your request. The owner has been notified.'
   end
 end

@@ -1,3 +1,6 @@
+require './lib/user'
+require './lib/dreambnb'
+
 def signup_user
   visit '/'
   fill_in('email', with: 'test@test.com')
