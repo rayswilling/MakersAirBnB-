@@ -88,9 +88,10 @@ class Dreambnb < Sinatra::Base
       listing: listing)
 
       flash[:notice] = 'Thanks for your request. The owner has been notified.'
+      redirect '/requests'
   end
 
   get '/requests' do 
-    erb :request
+    erb :requests
   end 
  end
