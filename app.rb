@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'date'
-require_relative './lib/dreambnb'
+require_relative './lib/space'
 require_relative './lib/user'
 require_relative './lib/request'
 require_relative './lib/database_connection_setup'
@@ -14,7 +14,7 @@ class Dreambnb < Sinatra::Base
     erb(:index)
   end
 
-  post '/users' do
+  post '/users/new' do
     if !User.first(email: params[:email]).nil?
       flash[:notice] = 'Email in use'
 
@@ -35,7 +35,7 @@ class Dreambnb < Sinatra::Base
     erb(:login)
   end
 
-  post '/sessions' do
+  post '/sessions/new' do
     user = User.authenticate(email: params[:email], password: params[:password])
     
     if !user.nil?
@@ -57,53 +57,53 @@ class Dreambnb < Sinatra::Base
   end
 
   get '/spaces' do
-    @listings = Listing.all
-    erb :spaces
+    @spaces = Space.all
+    erb(:'spaces/list')
   end
 
-  post '/spaces' do
+  get '/spaces/new' do
+    erb(:'spaces/new')
+  end
+
+  post '/spaces/new' do
     user = User.get(session[:id])
-    Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
+    Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
     
     redirect '/spaces'
   end
 
-  get '/spaces/new' do
-    erb :new
+  get '/spaces/:id' do 
+    @space = Space.get(params[:id])
+
+    erb(:'spaces/load')
   end
 
-   get '/spaces/:id' do 
-    @listing = Listing.get(params[:id])
+  get '/requests' do 
+    erb(:'requests/list')
+  end 
 
-    erb :space
-  end
-
-   post '/requests' do
+  post '/requests/new' do
     user = User.get(session[:id])
-    listing = Listing.get(params[:prop_id])
+    space = Space.get(params[:prop_id])
 
     Request.create(
       arrival_date: params[:arrival_date], 
       user: user, 
-      listing: listing)
+      space: space)
 
       flash[:notice] = 'Thanks for your request. The owner has been notified.'
       redirect '/requests'
   end
 
-  get '/requests' do 
-    erb :requests
-  end 
-
   get '/requests/:id' do 
     request = Request.get(params[:id])
-    space = Listing.get(request.listing_prop_id)
+    space = Space.get(request.space_id)
     user = User.get(request.user_id)
-    @other_requests_for_space = Request.all(listing_prop_id: space.prop_id) -  Request.all(id: request.id)
+    @other_requests_for_space = Request.all(space_id: space.id) -  Request.all(id: request.id)
     @email = user.email
     @name = space.name
     @date = request.arrival_date.strftime(fmt='%d/%m/%Y')  
   
-    erb :request
+    erb(:'requests/load')
  end
 end

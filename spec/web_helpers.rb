@@ -1,12 +1,15 @@
 require './lib/user'
-require './lib/dreambnb'
+require './lib/space'
 
-def signup_user
+def signup_user(email: 'test@test.com', password: '123', password_confirmation: '123')
   visit '/'
-  fill_in('email', with: 'test@test.com')
-  fill_in('password', with: '123')
-  fill_in('password_confirmation', with: '123')
+
+  fill_in('email', with: email)
+  fill_in('password', with: password)
+  fill_in('password_confirmation', with: password_confirmation)
   click_button('sign_up')
+
+  User.first(email: email)
 end
 
 def visit_login_page
@@ -14,7 +17,7 @@ def visit_login_page
   click_link('Login')
 end
 
-def create_listing
+def create_space
   click_button('List a Space')
   fill_in('name', with: 'Testing like a champ')
   fill_in('description', with: 'A big ole test')

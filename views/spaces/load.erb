@@ -1,0 +1,9 @@
+<h1><%= @space.name %></h1>
+<h3><%= @space.description %></h3>
+
+<form action='/requests/new' method='post'>
+    <label for="arrival">Pick a night:</label>
+    <input type="date" name="arrival_date" min="<%= Date.today %>" max="<%= @space.available_until.to_date %>">
+    <input type='hidden' name="prop_id" value=<%= @space.id %>>
+    <input type='submit' value='Request to book'>
+</form>

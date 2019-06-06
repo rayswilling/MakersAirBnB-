@@ -1,6 +1,6 @@
 require 'data_mapper'
 require 'dm-postgres-adapter'
-require_relative './dreambnb'
+require_relative './space'
 
 class User
   include DataMapper::Resource
@@ -9,11 +9,10 @@ class User
   property :email,          String, required: true
   property :password,       String, required: true
 
-  has n, :listing
+  has n, :space
+  has n, :request
 
   def self.authenticate(email:, password:)
-    user = User.first(email: email)
-
-    !user.nil? && user.password == password ? user : nil
+    User.first(email: email, password: password)
   end
 end

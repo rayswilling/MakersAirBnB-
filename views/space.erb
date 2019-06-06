@@ -1,9 +1,0 @@
-<h1><%= @listing.name %></h1>
-<h3><%= @listing.description %></h3>
-
-<form action='/requests' method='post'>
-    <label for="arrival">Pick a night:</label>
-    <input type="date" name="arrival_date" min="<%= Date.today %>" max="<%= @listing.available_until.to_date %>">
-    <input type='hidden' name="prop_id" value=<%= @listing.prop_id %>>
-    <input type='submit' value='Request to book'>
-</form>
