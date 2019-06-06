@@ -6,7 +6,7 @@ class User
   include DataMapper::Resource
 
   property :id,             Serial
-  property :email,          String, required: true, required: true
+  property :email,          String, required: true
   property :password,       String, required: true
 
   has n, :listing
