@@ -12,5 +12,5 @@ class Listing
   property :available_from,      DateTime
   property :available_until,     DateTime
 
-  belongs_to :user, :required => false
+  belongs_to :user
 end
