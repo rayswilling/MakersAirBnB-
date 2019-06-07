@@ -116,13 +116,18 @@ class Dreambnb < Sinatra::Base
   post '/request/:id/confirm' do
     request_confirm = Request.get(params[:id])
     request_confirm.update(:confirm => true)
+    same_day_requests = Request.all(arrival_date: request_confirm.arrival_date) - request_confirm
+    same_day_requests.each do |same_day_request|
+      same_day_request.update(confirm: false)
+    end 
 
     redirect '/requests' 
   end
 
   post '/request/:id/deny' do
-    request_confirm = Request.get(params[:id])
-    request_confirm.update(confirm: false)
+    request_deny = Request.get(params[:id])
+    request_deny.update(confirm: false)
+
 
     redirect '/requests' 
   end

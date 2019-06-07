@@ -57,6 +57,26 @@ feature 'Confirming and denying' do
         expect(page).to have_content('07/05/2019')
     end
 
+    scenario 'other requests on the same day of a confirmed request are denied' do 
+        signup_user
+        create_listing
+        visit('/spaces')
+        click_link('Testing like a champ')
+        fill_in('arrival_date', with: '06/05/2019')
+        click_button('Request to book')
+        
+        visit('/spaces')
+        click_link('Testing like a champ')
+        fill_in('arrival_date', with: '06/05/2019')
+        click_button('Request to book')
+
+        visit('/requests/2')
+        click_button('Confirm Request from test@test.com')
+
+        expect(page).to have_content('Confirmed')
+        expect(page).to have_content('Denied')
+    end 
+
 end 
 
 
