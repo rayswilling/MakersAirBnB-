@@ -3,13 +3,13 @@ require 'dm-postgres-adapter'
 require_relative './dreambnb'
 require_relative './user'
 
-class Request 
+class Request
     include DataMapper::Resource
 
     property :id,                   Serial
     property :arrival_date,         Date
-    # property :status,       String, default: 'Unconfirmed' # Required!
+    property :confirm,              Boolean
 
-    belongs_to :user 
+    belongs_to :user
     belongs_to :listing
 end
