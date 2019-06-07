@@ -65,7 +65,6 @@ class Dreambnb < Sinatra::Base
 
   post '/spaces' do
     user = User.get(session[:id])
-    puts user
     Listing.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_until: params[:available_until], user: user)
 
     redirect '/spaces'
@@ -98,10 +97,10 @@ class Dreambnb < Sinatra::Base
   get '/requests' do
     @requests_made = Request.all(user_id: session[:id])
     @user_spaces = Listing.all(user_id: session[:id])
-    p "------------------user spaces----------------------"
-    p @user_spaces
-    p "------------------requests made----------------------"
-    p @requests_made
+    # p "------------------user spaces----------------------"
+    # p @user_spaces
+    # p "------------------requests made----------------------"
+    # p @requests_made
     erb :requests
   end
  end

@@ -31,3 +31,13 @@ def create_listing
   fill_in('available_until', with: '10/05/2019')
   click_button('Submit')
 end
+
+def create_another_listing
+  click_button('List a Space')
+  fill_in('name', with: 'Test 2')
+  fill_in('description', with: 'A big ole test')
+  fill_in('price', with: '0.99')
+  fill_in('available_from', with: '06/05/2019')
+  fill_in('available_until', with: '10/05/2019')
+  click_button('Submit')
+end

@@ -7,6 +7,7 @@ feature 'View a list of requests' do
     expect(page).to have_content("Requests I've Made")
     expect(page).to have_content("Requests I've Received")
   end
+
   scenario 'A user can view requests they have sent' do
     signup_user
     create_listing
@@ -35,6 +36,7 @@ feature 'View a list of requests' do
     click_button 'Log in'
     click_button 'Requests'
     expect(page).to have_content('Testing like a champ')
+    expect(current_path).to eq('/requests')
 
 
     # sign up user 1
