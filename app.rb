@@ -102,5 +102,18 @@ class Dreambnb < Sinatra::Base
     # p "------------------requests made----------------------"
     # p @requests_made
     erb :requests
+  end 
+
+  get '/requests/:id' do 
+    request = Request.get(params[:id])
+    space = Listing.get(request.listing_prop_id)
+    user = User.get(request.user_id)
+    @other_requests_for_space = Request.all(listing_prop_id: space.prop_id) -  Request.all(id: request.id)
+    @email = user.email
+    @name = space.name
+    @date = request.arrival_date.strftime(fmt='%d/%m/%Y')  
+  
+    erb :request
+    
   end
- end
+end
