@@ -97,10 +97,6 @@ class Dreambnb < Sinatra::Base
   get '/requests' do
     @requests_made = Request.all(user_id: session[:id])
     @user_spaces = Listing.all(user_id: session[:id])
-    # p "------------------user spaces----------------------"
-    # p @user_spaces
-    # p "------------------requests made----------------------"
-    # p @requests_made
     erb :requests
   end 
 
