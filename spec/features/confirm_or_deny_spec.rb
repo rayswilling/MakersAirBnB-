@@ -54,7 +54,6 @@ feature 'Confirming and denying' do
         fill_in('arrival_date', with: '07/05/2019')
         click_button('Request to book')
         visit('/requests/1')
-        save_and_open_page
         expect(page).to have_content('07/05/2019')
     end
 end 
