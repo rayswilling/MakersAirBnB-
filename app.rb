@@ -97,14 +97,11 @@ class Dreambnb < Sinatra::Base
   get '/requests' do
     @requests_made = Request.all(user_id: session[:id])
     @user_spaces = Listing.all(user_id: session[:id])
-    # p "------------------user spaces----------------------"
-    # p @user_spaces
-    # p "------------------requests made----------------------"
-    # p @requests_made
     erb :requests
   end 
 
   get '/requests/:id' do 
+    @request_id = params[:id]
     request = Request.get(params[:id])
     space = Listing.get(request.listing_prop_id)
     user = User.get(request.user_id)
@@ -114,6 +111,24 @@ class Dreambnb < Sinatra::Base
     @date = request.arrival_date.strftime(fmt='%d/%m/%Y')  
   
     erb :request
-    
+  end
+
+  post '/request/:id/confirm' do
+    request_confirm = Request.get(params[:id])
+    request_confirm.update(:confirm => true)
+    same_day_requests = Request.all(arrival_date: request_confirm.arrival_date) - request_confirm
+    same_day_requests.each do |same_day_request|
+      same_day_request.update(confirm: false)
+    end 
+
+    redirect '/requests' 
+  end
+
+  post '/request/:id/deny' do
+    request_deny = Request.get(params[:id])
+    request_deny.update(confirm: false)
+
+
+    redirect '/requests' 
   end
 end

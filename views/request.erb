@@ -25,12 +25,12 @@
 </ul>
 <% end %>
 
-<form action="/requests" method='post'>
+<form action="/request/<%= @request_id %>/confirm" method='post'>
     <button>Confirm Request from <%= @email %> </button>
 </form>
 <br>
 
-<form action="/requests" method='post'>
+<form action="/request/<%= @request_id %>/deny" method='post'>
     <button>Deny Request from <%= @email %> </button>
 </form>
 <br>
