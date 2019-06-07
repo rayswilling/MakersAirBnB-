@@ -15,7 +15,7 @@
           <% @requests_made.each do |request| %>
             <tr>
               <td>
-               <li><a href="/spaces/<%= request.listing_prop_id %>"><%= Listing.get(request.listing_prop_id).name  %> 
+               <li><a href="/spaces/<%= request.listing_prop_id %>"><%= Listing.get(request.listing_prop_id).name  %> />
                 <br>
                 <%=request.arrival_date.strftime("%d/%m/%Y") %>
                 <br>
