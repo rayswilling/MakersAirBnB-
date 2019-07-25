@@ -84,7 +84,7 @@ I want to be able to see a list of my booking requests.
 
 
 ID | Arrival Date | Confirm | User ID (requester) | Listing Property ID
------|-----|--------|-----|-----|--------|--------
+-----|-----|-----|-----|-----|-----
 #1 | 10/6/19 | True | #2 | #1
 
 <br>
