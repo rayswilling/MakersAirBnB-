@@ -116,7 +116,3 @@ I want to be able to see a list of my booking requests.
 
 ```
 <br>
-
-**Mapping**
-
-![amazingspecnesting](./image.png)
